@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<section>
+  <div class="container mt-3">
+    <h1 class="text-center">Settings</h1>
+    <div class="list-group">
+      <form th:action="@{/user/edit-profile}" method="post">
+        <button type="submit" class="list-group-item list-group-item-action">Edit Profile</button>
+      </form>
+      <form href="#" method="post">
+        <button type="submit" class="list-group-item list-group-item-action">Change Password</button>
+      </form>
+      <form th:action="@{/logout}" method="post">
+        <button type="submit" class="list-group-item list-group-item-action">Logout</button>
+      </form>
+    </div>
+    <hr>
+    <h3 class="text-center">Change Password</h3>
+    <form th:action="@{/user/setting}" method="post">
+      <div class="form-group">
+        <label for="oldPassword">Old Password</label>
+        <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Enter your oldpassword" required>
+      </div>
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter you new password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+</section>
+</body>
+</html>

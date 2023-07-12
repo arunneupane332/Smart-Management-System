@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/CSS/profile.css}">
+    <title>Your profile</title>
+</head>
+<body>
+<section>
+    <h1><center> WELCOME TO THE PROFILE SECTION</center> </h1>
+    <center>
+        <div class="container">
+            <div class="profile">
+                <div class="profile-image">
+<!--                    <img th:src="@{/profile/image}" alt="Profile Image">-->
+                    <form method="post" enctype="multipart/form-data" th:action="@{/profile}">
+                        <input type="file"  name="imageurl" accept="image/png, image/jpg">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form>
+                </div>
+                <div class="profile-details">
+                    <center>
+                        <h2 th:text="${user.name}">John Doe</h2>
+                        <p>Email: <span th:text="${user.email}">johndoe@example.com</span></p>
+                        <p>About: <span th:text="${user.about}">New York, USA</span></p>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </center>
+</section>
+</body>
+</html>

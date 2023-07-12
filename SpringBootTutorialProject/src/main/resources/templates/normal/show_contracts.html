@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<section>
+  <div class="card mr-3 ml-3">
+    <div class="card-body">
+      <div th:if="${session.message}" class="container" >
+        <div class="alert alert-danger my-2 text-center" role="alert">
+          <span th:text="${session.message}"></span>
+        </div>
+        <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+      </div>
+      <h1 class="text-center">YOUR CONTRACTS</h1>
+      <table class="table table-bordered table-light">
+        <thead>
+        <tr>
+          <th scope="col">#ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Work</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Description</th>
+          <th scope="col">Action</th>
+          <th scope="col">Update</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c:${contracts}">
+          <th scope="row" th:text="'NP000'+${c.Cid}">1</th>
+          <td th:text="${c.name}">Mark</td>
+          <td th:text="${c.email}">Otto</td>
+          <td th:text="${c.work}">@mdo</td>
+          <td th:text="${c.phone}">@mdo</td>
+          <td th:text="${c.description}">@mdo</td>
+          <td>
+            <a th:href="@{'/user/delete/'+${c.Cid}}" class="btn btn-danger btn-sm">Delete</a>
+          </td>
+          <form method="post"th:action="@{'/user/update-contract/'+${c.Cid}}" class="mt-2">
+          <td>
+            <button class="btn btn-success btn-sm">Update</button>
+          </td>
+          </form>
+        </tr>
+<!--        <tr>-->
+<!--          <th scope="row">2</th>-->
+<!--          <td>Jacob</td>-->
+<!--          <td>Thornton</td>-->
+<!--          <td>@fat</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <th scope="row">3</th>-->
+<!--          <td colspan="2">Larry the Bird</td>-->
+<!--          <td>@twitter</td>-->
+<!--        </tr>-->
+        </tbody>
+      </table>
+
+<!--      pagination-->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li th:if="${currentpage != 0}" class="page-item"><a th:href="@{'/user/show-contract/'+${currentpage-1}}" class="page-link" href="#">Previous</a></li>
+
+          <li th:classappend="${currentpage == i-1?'active':''}" th:each="i : ${#numbers.sequence(1,totalpages)}" class="page-item"><a  th:href="@{'/user/show-contract/'+${i-1}}" class="page-link" href="#"><span th:text="${i}"></span> </a></li>
+
+          <li th:if="${currentpage+1 != totalpages}" class="page-item"><a th:href="@{'/user/show-contract/'+${currentpage+1}}"  class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile</title>
+    <link rel="stylesheet" th:href="@{/CSS/style.css}">
+</head>
+<body>
+<section>
+    <div class="dashboard">
+        <h1>Welcome <span th:text="${user.name}"></span> to Your Profile Dashboard</h1>
+        <div class="profile-info">
+            <h2>Profile Information</h2>
+            <ul>
+                <li><strong>ID:</strong> <span th:text="${user.id}"></span></li>
+                <li><strong>Name:</strong> <span th:text="${user.name}"></span></li>
+                <li><strong>Email:</strong> <span th:text="${user.email}"></span></li>
+                <li><strong>Role:</strong> <span th:text="${user.role}"></span></li>
+                <li><strong>About:</strong> <span th:text="${user.about}"></span></li>
+            </ul>
+        </div>
+        <div class="actions">
+            <form method="post"th:action="@{/user/edit-profile}" >
+                    <button class="btn btn-success btn-sm">Edit Profile</button>
+            </form>
+            <a class="logout-btn" th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+</section>
+<script>
+    document.getElementById('edit-profile-btn').addEventListener('click', function() {
+        // Perform edit profile action
+        alert('Edit Profile button clicked!');
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', function() {
+        // Perform logout action
+        alert('Logout button clicked!');
+    });
+</script>
+</body>
+</html>

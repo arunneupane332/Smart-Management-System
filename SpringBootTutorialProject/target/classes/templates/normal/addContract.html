@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Contract</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body>
+<section>
+
+  <div class="container mt-3">
+    <h1 class="text-center mb-4">Add Contract</h1>
+    <form th:action="@{/user/process-contract}" th:object="${contract}" method="POST"
+          class="needs-validation" >
+        <label for="validationCustom01" class="form-label">First Name</label>
+        <input name="name" type="text" class="form-control" id="validationCustom01" placeholder="Enter first name"
+               value="Mark" required th:value="${contract.name}">
+        <div class="invalid-feedback">
+          Please provide a first name.
+        </div>
+
+      <div class="mb-3">
+        <label for="validationCustom02" class="form-label">Last Name</label>
+        <input name="lastName" type="text" class="form-control" id="validationCustom02" placeholder="Enter last name"
+               value="Otto" required th:value="${contract.lastName}">
+        <div class="invalid-feedback">
+          Please provide a last name.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="validationCustomUsername" class="form-label">Email</label>
+        <div class="input-group">
+          <span class="input-group-text" id="inputGroupPrepend">@</span>
+          <input name="email" type="email" class="form-control" id="validationCustomUsername"
+                 placeholder="Enter email address" aria-describedby="inputGroupPrepend" required th:value="${contract.email}">
+          <div class="invalid-feedback">
+            Please choose a valid email address.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="validationCustom03" class="form-label">Work</label>
+        <input name="work" type="text" class="form-control" id="validationCustom03" placeholder="Enter work"
+               required th:value="${contract.work}">
+        <div class="invalid-feedback">
+          Please provide a work description.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="validationCustom04" class="form-label">Phone</label>
+        <input name="phone" type="text" class="form-control" id="validationCustom04" placeholder="Enter phone"
+               required th:value="${contract.phone}">
+        <div class="invalid-feedback">
+          Please provide a phone number.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="validationCustom05" class="form-label">Description</label>
+        <input name="description" class="form-control" id="validationCustom05" placeholder="Enter description" th:value="${contract.description}"></input>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-lg">SUBMIT</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</body>
+</html>

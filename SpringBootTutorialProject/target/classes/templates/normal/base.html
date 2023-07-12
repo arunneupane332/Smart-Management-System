@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/CSS/style.css}">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <title>Smart Contract Manager</title>
+</head>
+<body>
+<!--navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" th:href="@{/user/index}" >Smart Contract Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/user/index}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link disabled"><span th:text="${user.name}"></span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link disabled" th:href="@{/logout}">LogOut</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--end of nav bar-->
+
+<div class="sidebar">
+  <span onclick="toggleSidebar()" class="crossBtn"></span>
+  <form id="homeForm" method="post" action="/user/index">
+    <input type="hidden" name="homeForm" value="post">
+  </form>
+  <a href="#" onclick="submitForm('homeForm')" class="items"><i class="fas fa-home"></i> Home</a>
+
+  <form id="contractForm" method="get" action="/user/show-contract/0">
+    <input type="hidden" name="contractForm" value="post">
+  </form>
+  <a href="#" onclick="submitForm('contractForm')" class="items"><i class="fas fa-id-card-alt"></i> View Contract</a>
+
+  <form id="addContractForm" method="get" action="/user/add-contract">
+    <input type="hidden" name="addContractForm" value="post">
+  </form>
+  <a href="#" onclick="submitForm('addContractForm')" class="items"><i class="fas fa-pencil-alt"></i> Add Contract</a>
+
+  <form id="profileForm" method="post" action="/user/profile" >
+    <input type="hidden" name="profileForm" value="post">
+  </form>
+  <a href="#" onclick="submitForm('profileForm')" class="items"><i class="fas fa-user-circle"></i> Your Profile</a>
+
+  <form id="settingForm" method="post" action="/user/setting">
+    <input type="hidden" name="settingForm" value="post">
+  </form>
+  <a href="#" onclick="submitForm('settingForm')" class="items"><i class="fas fa-cogs"></i> Setting</a>
+</div>
+
+
+
+<div class="content">
+  <i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
+  <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+    <p class="text-center" th:text="${session.message.content}"></p>
+    <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+  </div>
+  <div th:insert="${content}"></div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+function submitForm(formId) {
+    document.getElementById(formId).submit();
+  }
+  const toggleSidebar = () => {
+  if ($(".sidebar").is(":visible")) {
+    $(".sidebar").css("display", "none");
+    $(".content").css("margin-left", "0%");
+  } else {
+    $(".sidebar").css("display", "block");
+    $(".content").css("margin-left", "20%");
+  }
+}
+</script>
+</body>
+</html>
